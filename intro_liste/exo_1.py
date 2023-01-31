@@ -1,13 +1,10 @@
 def main():
     animaux = ['chat', 'chien', 'taupe']
     print(animaux)
-    compteur = 0
-    
-    for i in animaux:
-        compteur +=1
+    top = len(animaux) - 1
     temp = animaux[0]
-    animaux[0] = animaux[compteur-1]
-    animaux[compteur-1] = temp
+    animaux[0] = animaux[top]
+    animaux[top] = temp
     
     print(animaux)
 
