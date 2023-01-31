@@ -1,5 +1,8 @@
 def main():
-    animaux = ['chat', 'chien', 'taupe']
+    animaux = []
+    how_many_animals = int(input("enter how many animals you need: "))
+    for i in range(how_many_animals):
+        animaux.append(input("enter the animal: "))
     print(animaux)
     top = len(animaux) - 1
     temp = animaux[0]
