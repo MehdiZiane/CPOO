@@ -1,3 +1,5 @@
+import math
+
 class Forme:
     def perimeter(self):
         print("perimeter is not defind")
@@ -36,3 +38,11 @@ class triangle(Forme):
     def perimeter(self):
         super().perimeter()
         return (self.coteA + self.coteB + self.coteC)
+
+class cercle(Forme):
+    def __init__(self, diametre):
+        self.diametre = diametre
+    def perimeter(self):
+        super().perimeter()
+        return (self.diametre * math.pi)
+        
