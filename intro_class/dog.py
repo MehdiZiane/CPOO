@@ -28,9 +28,7 @@ class Mammifere(Animal):
 
 class Company():
     
-    doglst = []
-    catlst = []
-    companylst = doglst + catlst
+    companylst = []
     
     @classmethod
     def promener(cls):
@@ -42,13 +40,13 @@ class Company():
     
     @classmethod
     def jouer(cls):
-        attrape = random.choice(cls.doglst)
+        attrape = random.choice(cls.companylst)
 
 class Chien(Mammifere):
 
     def __init__(self, nom, age, poils, robe, race):
         super().__init__(nom,age, poils, robe, race)
-        Company.doglst.append(self)
+        Company.companylst.append(self)
     
     def talking(self):
         speaking_list = ["woaf woaf", "grrr grrr", "wif wif", "pouf pouf"]
@@ -58,7 +56,7 @@ class Chien(Mammifere):
 class chat(Mammifere):
     def __init__(self, nom, age, poils, robe, race):
         super().__init__(nom, age, poils, robe, race)
-        Company.catlst.append(self)
+        Company.companylst.append(self)
     
     def talking(self):
         speaking_list = ["grrr grrr", "miaow miaow", "chip chip"]
@@ -94,8 +92,6 @@ def main():
     berlioz = chat('Berlioz', 1,'boucle','rouge','pischat' )
     
     Company.promener()
-
-    charlotte.information()
 
 if __name__ == '__main__':
     main()
