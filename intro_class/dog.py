@@ -6,15 +6,16 @@ class Animal():
         self.age = age
     
     def faim(self):
-        seuil_faim = 50  # seuil de faim
-        is_hungry = random.randint(0, 100)  # génère un nombre aléatoire entre 0 et 100
+        seuil_faim = 50  
+        is_hungry = random.randint(0, 100) 
 
         if is_hungry < seuil_faim:
             print(f"{self.nom} a faim.")
         else:
             print(f"{self.nom} n'a pas faim.")
 
-class company(Animal):
+class Mammifere(Animal):
+    typ = 'mammifere'
     def __init__(self, nom, age, poils, robe, race):
         super().__init__(nom, age)
         self.poils = poils
@@ -22,22 +23,42 @@ class company(Animal):
         self.race = race
     
     def information(self):
-        print(f"ce {self.__class__.__name__.lower()} s'appelle {self.nom}, il a {self.age} ans, des poils de type {self.poils} et une robe {self.robe}, de race {self.race}")
+        print(f"ce {self.__class__.__name__.lower()} s'appelle {self.nom}, il a {self.age} ans, des poils de type {self.poils} et une robe {self.robe}, de race {self.race}, de type {self.typ}")
 
-class Chien(company):
-    dogtype = "mammifère"
+
+class Company():
+    
+    doglst = []
+    catlst = []
+    companylst = doglst + catlst
+    
+    @classmethod
+    def promener(cls):
+        for animal in cls.companylst:
+            if animal.__class__.__name__ == 'Chien':
+                print("les chiens se promene, ils sont heureux")
+            else:
+                print("les chats se promene seule")
+    
+    @classmethod
+    def jouer(cls):
+        attrape = random.choice(cls.doglst)
+
+class Chien(Mammifere):
 
     def __init__(self, nom, age, poils, robe, race):
         super().__init__(nom,age, poils, robe, race)
+        Company.doglst.append(self)
     
     def talking(self):
         speaking_list = ["woaf woaf", "grrr grrr", "wif wif", "pouf pouf"]
         son = random.choice(speaking_list)
         print(f"{self.nom} : {son}")
 
-class chat(company):
+class chat(Mammifere):
     def __init__(self, nom, age, poils, robe, race):
         super().__init__(nom, age, poils, robe, race)
+        Company.catlst.append(self)
     
     def talking(self):
         speaking_list = ["grrr grrr", "miaow miaow", "chip chip"]
@@ -65,24 +86,16 @@ def younger_dog(chiens):
 
 
 def main():
-    chien1 = Chien('Charlotte', 18, 'lisse', 'blanche', 'chien de berger')
-    chien2 = Chien('Patrick', 23,  'boucle', 'noir','terrier')
-    chien3 = Chien('Bof', 11, 'curly', 'brune','tekkel')
-    chiens = [chien1, chien2, chien3]
-    oldest = oldest_dog(chiens)
-    print("le plus vieux chien est", oldest.nom, "il a",oldest.age )
-    younger = younger_dog(chiens)
-    print("le plus jeune chien est", younger.nom, "il a", younger.age)
-    chien1.talking()
-    chien2.talking()
-    chien3.talking()
-    chien1.information()
-    chien1.faim()
-    chat1 = chat('alphonse', 10, 'lisse', 'roux', 'siamois')
-    print(chat1.nom)
-    chat1.talking()
-    chat1.information()
-    chat1.faim()
+    charlotte= Chien('Charlotte', 18, 'lisse', 'blanche', 'chien de berger')
+    patrick= Chien('Patrick', 23,  'boucle', 'noir','terrier')
+    bof= Chien('Bof', 11, 'curly', 'brune','tekkel')
+    marie = chat('Marie', 1, 'lisse', 'roux', 'siamois')
+    toulouse = chat('Toulouse', 1, 'curly','blanc', 'paschat')
+    berlioz = chat('Berlioz', 1,'boucle','rouge','pischat' )
+    
+    Company.promener()
+
+    charlotte.information()
 
 if __name__ == '__main__':
     main()
